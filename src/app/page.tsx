@@ -1,4 +1,4 @@
-import V2RootPage from "./(root)/v2/page";
+import V2RootPage from "./(root)/v1/page";
 
 export default function Home() {
   return (

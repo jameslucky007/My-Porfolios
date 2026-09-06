@@ -17,7 +17,7 @@ const About = () => {
         {/* Header */}
         <div className="flex flex-wrap items-center justify-between gap-4">
           <h2 className="text-2xl sm:text-3xl lg:text-3xl font-bold text-blue-300">
-            About Me
+            Lakki Ali (Lucky)
           </h2>
 
           <a

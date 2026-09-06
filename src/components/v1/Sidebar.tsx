@@ -1,5 +1,6 @@
 "use client";
 import React, { useState, useEffect } from "react";
+import { motion } from "framer-motion";
 import {
   FaGithub,
   FaLinkedin,
@@ -61,7 +62,7 @@ const Sidebar = () => {
     return () => window.removeEventListener("scroll", checkActiveSection);
   }, [active, links]);
 
-  const handleClick = (id) => {
+  const handleClick = (id: string) => {
     setActive(id);
 
     const element = document.getElementById(id);
@@ -73,27 +74,49 @@ const Sidebar = () => {
   return (
     <aside className="lg:max-w-md lg:p-10 lg:ml-12 lg:fixed lg:h-screen text-white lg:w-1/3 p-6 relative z-30 flex flex-col items-center lg:items-start text-center lg:text-left bar">
       <div className="lg:sticky lg:top-10 w-full flex flex-col items-center lg:items-start">
-        <Link href={"/"}>
-          <Image
-            className="rounded-full w-32 h-32 lg:w-40 lg:h-40 object-cover border-2 border-blue-300 mb-5 "
-            src="/Profile.webp"
-            alt="Profile"
-            width={150}
-            height={150}
-          />
-        </Link>
+        <div className="relative flex items-center justify-center mb-8 lg:mb-12 mt-4 w-32 h-32 lg:w-40 lg:h-40">
+          <Link href={"/"} className="z-10 w-full h-full">
+            <Image
+              className="rounded-full w-full h-full object-cover border-[3px] border-blue-400/30 shadow-[0_0_20px_rgba(96,165,250,0.2)] transition-all duration-300 hover:border-blue-400/60"
+              src="/Profile.webp"
+              alt="Profile"
+              width={160}
+              height={160}
+            />
+          </Link>
 
-        <a href="/">
-          <h1 className="text-3xl lg:text-5xl font-extrabold flex items-center">
-            Lakki Ali
-          </h1>
-        </a>
+          {/* Rotating SVG Text around image */}
+          <motion.div
+            animate={{ rotate: 360 }}
+            transition={{ duration: 16, repeat: Infinity, ease: "linear" }}
+            className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-0 w-[118%] h-[118%] pointer-events-none opacity-80"
+          >
+            <svg viewBox="0 0 100 100" className="w-full h-full overflow-visible">
+              <defs>
+                <path
+                  id="circlePath"
+                  d="M50,50 m-48,0 a48,48 0 1,1 96,0 a48,48 0 1,1 -96,0"
+                />
+              </defs>
 
-        <h4 className="text-lg lg:text-l mt-2 text-blue-300">
-           Developer | Engineer | Designer
-        </h4>
-
-        <nav className="mt-8 lg:mt-10 space-y-2 text-l font-semibold tracking-wide flex flex-col items-center lg:items-start">
+              <text
+                fontSize="6.5"
+                fontWeight="500"
+                fill="#93c5fd"
+                className="uppercase tracking-widest"
+              >
+                <textPath
+                  href="#circlePath"
+                  startOffset="0%"
+                  textLength="301.5"
+                >
+                  {"Developer • Engineer • Designer • Developer • Engineer • Designer • "}
+                </textPath>
+              </text>
+            </svg>
+          </motion.div>
+        </div>
+        <nav className="mt-6 lg:mt-8 space-y-2 text-l font-semibold tracking-wide flex flex-col items-center lg:items-start">
           {links.map((link) => (
             <a
               key={link.id}
